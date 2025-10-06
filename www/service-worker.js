@@ -32,16 +32,14 @@ self.addEventListener('fetch', event => {
 });
 
 self.addEventListener('push', event => {
-  let data = { title: 'QoE Notification', body: 'Network status changed', tag: 'qoe' };
+  let data = { title: 'QoE Notification', body: 'Network status changed' };
   if (event.data) {
     try { data = event.data.json(); } catch(e) { data.body = event.data.text(); }
   }
   event.waitUntil(
     self.registration.showNotification(data.title, {
       body: data.body,
-      icon: './icons/icon-192.png',
-      tag: data.tag || 'qoe',
-      renotify: true
+      icon: './icons/icon-192.png'
     })
   );
 });
