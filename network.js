@@ -125,7 +125,7 @@ const PUSH_SERVER_URL = 'https://qoepushserver.onrender.com';
 
     const qs = `?throughput=${throughputMbps}&delay=${delayMs}&jitter=${jitterMs}&loss=${packetLoss}`;
     try {
-      const resp = await fetch(PREDICT_API_URL + qs);
+      const resp = await fetch(`${PREDICT_API_URL}${qs}`, { method: 'GET', cache: 'no-store' });
       const data = await resp.json();
       const label = data.prediction || data.predicted || 'Unknown';
       const body = `Predicted QoE: ${label}\nThroughput: ${throughputMbps} Mbps\nDelay: ${delayMs} ms\nJitter: ${jitterMs} ms\nPacket Loss: ${packetLoss.toFixed(1)}%`;
